@@ -1,0 +1,140 @@
+/* General styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Navbar styles */
+.navbar {
+    background-color:#11B69F;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-brand {
+    color: white;
+    font-size: 24px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.navbar-brand:hover {
+    color: #f0f0f0;
+}
+
+.navbar-links .nav-link {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 18px;
+    transition: color 0.3s;
+}
+
+.navbar-links .nav-link:hover {
+    color: #dcdcdc;
+    text-decoration: underline;
+}
+
+
+/* Features section styles */
+.features {
+    background-color: white;
+    padding: 50px 0;
+}
+
+.features .feature-item {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.features .feature-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.features .feature-icon {
+    font-size: 40px;
+    color: #11B69F;;
+    margin-bottom: 15px;
+}
+
+.features .feature-title {
+    font-size: 24px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.features .feature-link {
+    color: #11B69F;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 10px;
+    transition: color 0.3s;
+}
+
+.features .feature-link:hover {
+    color: #11B69F;
+    text-decoration: underline;
+}
+
+.icon-person:before {
+    content: "\1F464"; /* Unicode character for person icon */
+}
+
+.icon-arrow-right:before {
+    content: "\2192"; /* Unicode character for right arrow */
+}
+.footer {
+    background-color:#11B69F;;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 30px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.footer p {
+    margin: 0;
+    font-size: 16px;
+}
+
+.footer .social-links {
+    margin-top: 10px;
+}
+
+.footer .social-link {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s;
+}
+
+.footer .social-link:hover {
+    color: #dcdcdc;
+}
