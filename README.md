@@ -3,7 +3,6 @@
   2.	Klik kanan file Poliklinik_BK1-master.zip kemudian Anda klik Extract Here.
   3.	Setelah terekstrak, Rename Folder Poliklinik_BK1-master dengan nama BK_Arya kemudian klik kanan lagi folder BK_Arya lalu klik Cut atau Copy.
   4.	Selanjutnya Anda Paste ke folder xampp > folder htdocs.
- 
 2. Tambahkan Database Aplikasi Web Poliklinik
   1.	Buka XAMPP Control Panel yang sudah Anda install, lalu klik Start pada pilihan Apache dan MySQL.
   2.	Selanjutnya buka browser Anda kemudian kunjungi localhost/phpmyadmin.
