@@ -2,6 +2,7 @@
 include_once "../../../config/conn.php";
 session_start();
 
+// Cek login dan akses
 if (isset($_SESSION['login'])) {
     $_SESSION['login'] = true;
 } else {
@@ -18,28 +19,23 @@ if ($akses != 'dokter') {
     die();
 }
 
-// Fungsi untuk mengecek apakah jadwal sudah ada
-function cekJadwalPeriksa($data)
-{
+// Function to check if the schedule already exists for the same day
+function isHariExist($id_dokter, $hari) {
     global $conn;
-    $id_dokter = $data['id_dokter'];
-    $hari = $data['hari'];
-    $jam_mulai = $data['jam_mulai'];
-    $jam_selesai = $data['jam_selesai'];
-
     $query = "SELECT COUNT(*) AS count FROM jadwal_periksa 
-              WHERE id_dokter = ? AND hari = ? AND jam_mulai = ? AND jam_selesai = ?";
+              WHERE id_dokter = ? AND hari = ?";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("isss", $id_dokter, $hari, $jam_mulai, $jam_selesai);
+    $stmt->bind_param("is", $id_dokter, $hari);
     $stmt->execute();
-    $result = $stmt->get_result()->fetch_assoc();
-
-    return $result['count'] > 0;
+    $result = $stmt->get_result();
+    $data = $result->fetch_assoc();
+    return $data['count'] > 0; // Return true if the count is greater than 0
 }
 
-// Input data ke database
+
+// Input data to db
 if (isset($_POST["submit"])) {
-    // Cek validasi
+    // Validasi input
     if (empty($_POST["hari"]) || empty($_POST["jam_mulai"]) || empty($_POST["jam_selesai"])) {
         echo "
             <script>
@@ -49,18 +45,22 @@ if (isset($_POST["submit"])) {
         ";
         die;
     } else {
-        // Cek apakah jadwal sudah ada
-        if (cekJadwalPeriksa($_POST)) {
+        $hari = $_POST['hari'];
+        $jam_mulai = $_POST['jam_mulai'];
+        $jam_selesai = $_POST['jam_selesai'];
+
+        // Cek apakah hari sudah ada untuk dokter yang sama
+        if (isHariExist($id_dokter, $hari)) {
             echo "
                 <script>
-                    alert('Jadwal periksa sudah ada');
+                    alert('Data Gagal ditambahkan, jadwal untuk hari yang sama sudah ada');
                     document.location.href = '../jadwal_periksa/create.php';
                 </script>
             ";
             die;
         }
 
-        // Tambahkan data ke database
+        // Cek apakah data berhasil ditambahkan atau tidak
         if (tambahJadwalPeriksa($_POST) > 0) {
             echo "
                 <script>
@@ -71,8 +71,8 @@ if (isset($_POST["submit"])) {
         } else {
             echo "
                 <script>
-                    alert('Data gagal ditambahkan');
-                    document.location.href = '../jadwal_periksa';
+                    alert('Data Gagal ditambahkan');
+                    document.location.href = '../jadwal_periksa/create.php';
                 </script>
             ";
         }
@@ -141,4 +141,4 @@ $content = ob_get_clean();
 ob_flush();
 ?>
 
-<?php include_once "../../../layouts/index.php"; ?>
+<?php include_once "../../../layouts/index.php";?>
